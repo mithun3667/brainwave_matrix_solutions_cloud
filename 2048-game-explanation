@@ -1,0 +1,42 @@
+TASK: Deploy a web application using eks/kubernerts.
+create an EKS cluster:
+
+Name: eks-cluster-2048
+Use K8S version 1.30
+
+Create an IAM role 'eks-cluster-role' with 1 policy attached: AmazonEKSClusterPolicy
+Create another IAM role 'eks-node-grp-role' with 3 policies attached:
+(Allows EC2 instances to call AWS services on your behalf.)
+    - AmazonEKSWorkerNodePolicy
+    - AmazonEC2ContainerRegistryReadOnly
+    - AmazonEKS_CNI_Policy
+
+Choose default VPC, Choose 2 or 3 subnets
+Choose a security group which open the ports 22, 80, 8080
+cluster endpoint access: public
+
+Add node groups to the cluster:
+add the worker nodes where the pods can run
+
+Open the cluster > Compute > Add NodeGrp
+Name: <yourname>-eks-nodegrp-1
+Select the role you already created
+Leave default values for everything else
+
+AMI - choose the default 1 (Amazon Linux 2)
+change desired/minimum/maximum to 1 (from 2)
+Enable SSH access. Choose a security group which allwos ssh(22), http(80),  custon TCP(8080)
+
+Choose default values for other fields
+After creation of node group open the cloudshell
+
+the list of commands used to deploy the web application:
+1. aws sts get-caller-identity  #to check the account details and user id.
+2. aws eks update-kubeconfig --region ao-southeast-1 --name eks-cluster-2048  #kubeconfig configuration allows you to connect to the cluster using the using kubectl command line.
+3. then use the nano command to create yaml files.
+4. created the yaml files to deploy 2048-pod.yaml  #To create pods 
+5. created service yaml file called mygame-svc.yaml
+6. Then use the command kubectl apply -f mygame-svc.yaml to config the file.
+7. Then to see the details use command called kubectl describe svc mygame-svc.yaml
+8. Go to EC2 console. get the DNS name of ELB and paste the DNS into address bar of the browser
+9. It will show the 2048 game. You can play.
