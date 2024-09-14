@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My web page</title>
+    </head>
+    <body>
+        <h1>Hello, world!</h1>
+        <p>This is my first web page.</p>
+        <p>It contains a 
+             <strong>main heading</strong> and <em> paragraph </em>.
+        </p>
+    </body>
+</html>
+
+
+> create a s3 bucket in aws.
+> while creating of all block all public access.
+> keep acknowledge to yes
+> create the bucket.
+> them upload the file. i am using html5.
+> then change some configuration.
+> open object action --> share with a presigned URL --> In there you can give a permission to access the link for minutes and hours.
+> go to permissions --> object ownership --> edit --> enable --> give the acknowledgement --> save the changes.
+> go to open object action --> make public --> click make public.
+> copy the url and past in the browser.
